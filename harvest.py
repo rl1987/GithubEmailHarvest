@@ -52,11 +52,15 @@ def get_and_process_page(page):
             get_emails_for_user(login)
 
 
-page = START_PAGE
+def main():
+    page = START_PAGE
 
-while True:
-    print("Page ", page)
-    if get_and_process_page(page) == False:
+    while True:
+        print("Page ", page)
+        if get_and_process_page(page) == False:
+            break
+        page += 1
         break
-    page += 1
-    break
+
+if __name__ == "__main__":
+    main()
