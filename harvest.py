@@ -6,14 +6,16 @@ import requests
 START_PAGE = 1
 MAX_EMAILS = 200
 
+
 def search_commits_for_emails(commits):
     for c in commits:
-        email = c.get('author').get('email')
-        if email is not None and not str.endswith('github.com'):
+        email = c.get("author").get("email")
+        if email is not None and not str.endswith("github.com"):
             print(email)
 
+
 def get_emails_for_user(login):
-    url = f'https://api.github.com/users/{login}/events/public'
+    url = f"https://api.github.com/users/{login}/events/public"
 
     try:
         resp = requests.get(url)
@@ -26,14 +28,15 @@ def get_emails_for_user(login):
     print(json_array)
 
     for event in json_array:
-        ev_type = event.get('type')
-        if ev_type == 'PushEvent':
-            commits = event.get('commits')
+        ev_type = event.get("type")
+        if ev_type == "PushEvent":
+            commits = event.get("commits")
             if commits is not None and len(commits) > 0:
                 search_commits_for_emails(commits)
 
+
 def get_and_process_page(page):
-    url = f'https://api.github.com/search/users?q=repos:%3E12+followers:%3C1000&location:us&page={page}&per_page=100'
+    url = f"https://api.github.com/search/users?q=repos:%3E12+followers:%3C1000&location:us&page={page}&per_page=100"
 
     try:
         resp = requests.get(url)
@@ -48,10 +51,11 @@ def get_and_process_page(page):
         if login is not None:
             get_emails_for_user(login)
 
+
 page = START_PAGE
 
 while True:
-    print('Page ', page)
+    print("Page ", page)
     if get_and_process_page(page) == False:
         break
     page += 1
