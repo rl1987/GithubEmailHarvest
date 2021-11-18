@@ -25,8 +25,11 @@ def create_session():
     return session
 
 def main():
-    language = "Python"
-    query = "#webscraping"
+    language = input("Language [Python]: ")
+    query = input("Query: ")
+
+    if language == "":
+        language = "Python"
     
     session = create_session()
 
