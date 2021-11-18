@@ -39,6 +39,9 @@ def main():
 
             json_dict = resp.json()
 
+            if json_dict.get('email') is None:
+                continue
+
             row = {
                 'name' : json_dict.get('name'),
                 'login' : json_dict.get('login'),
