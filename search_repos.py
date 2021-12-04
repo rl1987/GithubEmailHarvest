@@ -20,6 +20,7 @@ def create_session():
     session.headers = {
         'Accept': 'application/vnd.github.v3+json',
         'Authorization': 'token ' + token,
+        'User-Agent': 'GithubEmailHarvest',
     }
 
     return session
