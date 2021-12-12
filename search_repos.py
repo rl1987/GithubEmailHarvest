@@ -51,6 +51,7 @@ def main():
 
         resp = session.get('https://api.github.com/search/repositories', params=params)
         print(resp.url)
+        print(resp.headers)
 
         json_dict = resp.json()
 
@@ -73,7 +74,7 @@ def main():
         
         page += 1
         
-        time.sleep(1)
+        time.sleep(1.2)
 
     out_f.close()
 
